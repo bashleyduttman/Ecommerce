@@ -1,0 +1,139 @@
+
+body {
+   background-color: rgb(251, 251, 251);
+   color:black;
+   font-size: clamp(16px,2vw,24px);
+  }
+  .main{
+    display: flex;
+    margin-top: 10%;
+    justify-content: center;
+  }
+  .login-span{
+    display: flex;
+    justify-content: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  .login_txt-span{
+    display: flex;
+    justify-self: center;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  }
+.side-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 50vh;
+    color:white;
+    padding: 22px;
+    
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    max-width: 300px;
+
+    background-color:  rgb(56, 47, 47);
+    
+}
+  .form-box{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    
+    padding: 20px;
+    background-color: rgb(252, 249, 254);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    justify-content: space-around;
+    border: solid rgb(0, 0, 0) 2px;
+}
+.email-in,.password-in{
+    max-width: 300px;
+    max-height: 80px;
+    min-width: 250px;
+    min-height: 40px;
+    padding-left: 10px;
+    color:rgb(100,65,23);
+   
+    border: solid black 2px;
+    background-color: white;
+    border-radius: 10px;
+    border: solid rgb(0, 0, 0) 1px;
+    
+
+}
+.email-in:focus,.password-in:focus{
+    border:solid rgb(100,65,23) 1px;
+    outline: none;
+}
+
+.message{
+    color:green;
+}
+.submit-btn{
+  background-color:  rgb(56, 47, 47);
+ color:white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.submit-btn:hover{
+  background-color: black;
+}
+.password-container{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+.password-toggle{
+    position: absolute;
+    right: 15px;
+    width: 5px; 
+    top: 10px;
+    background-color:transparent;
+    border: none;
+    cursor: pointer;
+    
+   
+}
+.no-password{
+    display: none;
+}
+.password-toggle:focus{
+    outline: none;
+    border: none;
+    
+}
+.no-account{
+  width:300px;
+  margin-top: 60px;
+  border:  black solid 2px;
+  height: 30px;
+  cursor: pointer;
+  transition:  all 0.2s ease-in-out;
+  border-radius: 10px;
+  
+}
+.no-account:hover{
+  font-size: 16px;
+}
+
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    animation: shake 0.3s ease-in-out;
+  }
+  

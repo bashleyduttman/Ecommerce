@@ -1,0 +1,102 @@
+.cart-container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background: #6a6666;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  
+  td {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  tr:hover {
+    background: #f1f1f1;
+  }
+  
+  /* Flexbox for quantity buttons */
+  .quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .decrement {
+    background: #dc3545;
+    color: white;
+  }
+  
+  .increment {
+    background: #28a745;
+    color: white;
+  }
+  
+  .delete-btn {
+    background: #ff4444;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background: #d63030;
+  }
+  
+  .total-price {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+    padding: 10px;
+    background: #6c6d6e;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .buy-container{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 200px;
+  }
+  .buy-btn{
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ff4444;
+    color:white;
+    border:none;
+  }
+  .buy-btn:hover{
+    background-color: #fa3535;
+  }

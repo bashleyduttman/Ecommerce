@@ -1,0 +1,45 @@
+*{
+margin: 0%;
+}
+.register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 50vh;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 100px;
+    background-color: rgb(247, 239, 239);
+
+   
+}
+
+.name-inp,.email-inp,.password-inp{
+    width: 350px;
+    
+    height: 40px;
+    border:solid rgb(173, 151, 151) 2px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.signup-btn{
+   width: 100px;
+   height: 30px;
+   background-color: rgb(247, 242, 242);
+   border:black solid 2px;
+   border-radius: 10px;
+   cursor: pointer;
+   transition: all 0.4s ;
+}
+.signup-btn:hover{
+    background-color: lightslategray;
+}
+.register-page{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    background-color: rgb(231, 228, 223);
+
+}

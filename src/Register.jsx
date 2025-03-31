@@ -85,7 +85,7 @@ function Register() {
           </div>
         </div>
         <div>
-          <button className="signup-btn">singup</button>
+          <button className="signup-btn">sign-up</button>
         </div>
         <div>{error}</div>
       </form>

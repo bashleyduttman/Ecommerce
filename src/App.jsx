@@ -1,11 +1,5 @@
-import { useState } from "react";
-import {
-  useNavigate,
-  Routes,
-  Route,
-  BrowserRouter,
-  useSearchParams,
-} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Routes, Route, BrowserRouter, useSearchParams } from "react-router-dom";
 import Login from "./login";
 import Products from "./Products";
 import Cart from "./Cart";
@@ -13,132 +7,62 @@ import Register from "./register";
 import Item from "./Item";
 import { jwtDecode } from "jwt-decode";
 import Search from "./Search";
-import { useEffect } from "react";
 import "./App.css";
+import OrderPlaced from "./OrderPlaced";
+import Purchase from "./Purchase";
 
 function App() {
   const [search, setSearch] = useState("");
-  const [reload, setReload] = useState(false);
-  const [message, setMessage] = useState("");
-  const [searchParameter] = useSearchParams();
-  const query = searchParameter.get("query");
-  if (query === "newpage") {
-    setReload(true);
-  }
+  const [message, setMessage] = useState("Login");
   const navigate = useNavigate();
 
-  const handleLogoutLogin = (message) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.exp * 1000 > Date.now()) {
+          setMessage("Logout");
+        }
+      } catch (error) {
+        console.error("JWT Decode Error:", error);
+      }
+    }
+  }, []);
+
+  const handleLogoutLogin = () => {
     if (message === "Login") {
       navigate("/");
     } else {
       localStorage.removeItem("token");
       setMessage("Login");
+      window.location.reload();
     }
   };
-  // useEffect(() => {
-  //   const reloading = () => {
-  //     window.location.reload();
-  //     setReload(false);
-  //   };
-  //   if (reload) {
-  //     reloading();
-  //   }
-  // }, [reload]);
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setMessage("Login");
-    } else {
-      const decoded = jwtDecode(token);
-      if (decoded.exp * 1000 <= Date.now()) {
-        setMessage("Login");
-      } else {
-        setMessage("Logout");
-      }
-    }
-  }, []);
-  const changeSearch = (e) => {
-    setSearch(e);
-  };
-  
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-    window.location.href = `/searchProducts?query=${search}`;
-
-    // navigate(`/searchProducts?query=${search}`)
-  };
-
-  const handleCart = () => {
-    navigate("/cart");
+    navigate(`/searchProducts?query=${search}`);
   };
 
   return (
     <div>
       <div className="headers">
-     
         <div className="headers1">
-          <div
-         
-            className="header-elements"
-            onClick={() => {
-              window.location.href = `/searchProducts?query=electronics`;
-            }}
-          >
-            Electronics
-          </div>
-          <div
-           
-             className="header-elements"
-            onClick={() => {
-              window.location.href = `/searchProducts?query=mobiles`;
-            }}
-          >
-            Mobiles
-          </div>
-          <div
-           
-             className="header-elements"
-            onClick={() => {
-              window.location.href = `/searchProducts?query=laptop`;
-            }}
-          >
-            Laptops
-          </div>
-          <div
-           
-             className="header-elements"
-            onClick={() => {
-              window.location.href = `/searchProducts?query=Book`;
-            }}
-          >
-            Books
-          </div>
+          {["electronics", "mobiles", "laptop", "Book"].map((category) => (
+            <div key={category} className="header-elements" onClick={() => navigate(`/searchProducts?query=${category}`)}>
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </div>
+          ))}
           <div className="input-container">
             <form onSubmit={handleSearch}>
-              <input
-                onChange={(e) => changeSearch(e.target.value)}
-                placeholder="search"
-                type="text"
-                className="search-inp"
-              ></input>
+              <input onChange={(e) => setSearch(e.target.value)} placeholder="Search" type="text" className="search-inp" />
             </form>
           </div>
         </div>
 
-      
-
-        <div className="header-elements" onClick={handleCart} >
-          Cart
-        </div>
-        <div
-        
-           className="header-elements"
-          onClick={() => handleLogoutLogin(message)}
-        >
-          {message}
-        </div>
+        <div className="header-elements" onClick={() => navigate("/cart")}>Cart</div>
+        <div className="header-elements" onClick={handleLogoutLogin}>{message}</div>
       </div>
 
       <Routes>
@@ -147,7 +71,9 @@ function App() {
         <Route path="/item/:id" element={<Item />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/searchProducts" element={<Search />} />
-        <Route path="/register" element={<Register />}></Route>
+        <Route path="/register" element={<Register />} />
+        <Route path="/purchase" element={<Purchase />} />
+        <Route path="/order-placed" element={<OrderPlaced />} />
       </Routes>
     </div>
   );

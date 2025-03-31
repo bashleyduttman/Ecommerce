@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import "./cart.css";
 
 function Cart() {
+  const navigate=useNavigate()
+
   const [products, setProducts] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [error, setError] = useState(null);
@@ -17,6 +20,11 @@ function Cart() {
   const decreaseQuantity = (id) => {
     setProductQuantity({ id, change: -1 });
   };
+  const purchasePage=()=>{
+    navigate('/purchase',{
+      state:{cartData:cartData,products:products,price:(price*0.012).toFixed(2)}
+    })
+  }
 
   const deleteItem = async (productId) => {
     console.log(productId);
@@ -96,8 +104,11 @@ function Cart() {
         },
       });
 
-      if (!response.ok) {
-        throw new Error("Can't fetch cart products");
+      if (response.status===401) {
+        throw new Error("Login to check out!");
+      }
+      else if(!response.ok){
+        throw new Error("cant fetch products")
       }
 
       const data = await response.json();
@@ -156,7 +167,9 @@ function Cart() {
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => setError(null), 5000);
-      return () => clearTimeout(timer);
+      () => clearTimeout(timer);
+      setTimeout(()=>navigate("/"),5000)
+      
     }
   }, [error]);
 
@@ -218,7 +231,7 @@ function Cart() {
       </div>
       {cartData.length > 0 && (
         <div className="buy-container">
-          <button className="buy-btn">Proceed to buy</button>
+          <button className="buy-btn" onClick={purchasePage}>Proceed to buy</button>
         </div>
       )}
     </div>
